@@ -11,6 +11,7 @@ class Main:
         self.screen = turtle.Screen()
         self.screen.bgcolor('black')
         turtle.tracer(4)
+        self.sorter = False
 
     def run(self):
         self.getList()
@@ -29,17 +30,24 @@ class Main:
                     self.array[i] = self.array[i +1]
                     self.array[i+1] = temp
                     flag = False
-                    self.draw(i+1,True)
-        print(self.array)
-
+                self.draw(i+1,True)
+            
+        time.sleep(0.05)
+        self.t.clear()
+        for index,item in enumerate(self.array):
+            self.move(index,item * 20)
+            self.t.fillcolor('pink')
+            self.t.begin_fill()
+            self.draw_sorting(index)
+            self.t.end_fill()
+    
     def getList(self):
         for i in range(1,15):
             self.array.append(i)
             random.shuffle(self.array)
-        print(self.array)
 
     def draw(self,sort,beingSorted):
-        time.sleep(1)
+        time.sleep(0.05)
         self.t.clear()
         for index,item in enumerate(self.array):
             self.move(index,item * 20)
